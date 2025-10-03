@@ -279,11 +279,14 @@ window.addEventListener("resize", () => {
   }, 200);
 });
 
+window.addEventListener("hashchange", handleHashChange);
+
 buildSidebar();
 buildHomeGrid();
 updateSidebarState();
 updateHomeGridState();
 generateCollageBackground();
+handleHashChange();
 
 passwordForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -299,6 +302,7 @@ passwordForm.addEventListener("submit", (event) => {
     showHome();
     updateSidebarState();
     updateHomeGridState();
+    handleHashChange();
   } else {
     passwordError.textContent = "Incorrect password. Try again.";
   }
@@ -317,8 +321,7 @@ prevButton.addEventListener("click", () => {
     return;
   }
 
-  currentIndex = targetIndex;
-  renderDay(currentIndex);
+  setHashForDay(targetIndex);
 });
 
 nextButton.addEventListener("click", () => {
@@ -334,8 +337,7 @@ nextButton.addEventListener("click", () => {
     return;
   }
 
-  currentIndex = targetIndex;
-  renderDay(currentIndex);
+  setHashForDay(targetIndex);
 });
 
 if (dayList) {
@@ -355,14 +357,7 @@ if (dayList) {
       return;
     }
 
-    const entry = dayEntries[targetIndex];
-    if (!isDateAccessible(entry.date)) {
-      flashMessage(TOO_SOON_MESSAGE);
-      return;
-    }
-
-    currentIndex = targetIndex;
-    renderDay(currentIndex);
+    setHashForDay(targetIndex);
   });
 }
 
@@ -378,16 +373,7 @@ if (homeGrid) {
       return;
     }
 
-    const entry = dayEntries[targetIndex];
-    if (!isDateAccessible(entry.date)) {
-      setHomeStatus(TOO_SOON_MESSAGE);
-      flashMessage(TOO_SOON_MESSAGE);
-      return;
-    }
-
-    currentIndex = targetIndex;
-    setHomeStatus("");
-    renderDay(currentIndex);
+    setHashForDay(targetIndex);
   });
 }
 
@@ -396,10 +382,7 @@ if (backHomeButton) {
     if (!isAuthenticated) {
       return;
     }
-    showHome();
-    updateHomeGridState();
-    setHomeStatus("");
-    statusMessage.textContent = "";
+    setHashForDay(null);
   });
 }
 
@@ -432,6 +415,7 @@ function renderDay(index) {
     return;
   }
 
+  currentIndex = index;
   showDayView();
   const entry = dayEntries[index];
   const unlocked = isDateAccessible(entry.date);
@@ -555,6 +539,75 @@ function formatEntryText(text) {
     )
     .map((content) => `<p>${content}</p>`)
     .join("");
+}
+
+function parseHashValue(hash) {
+  if (!hash) {
+    return null;
+  }
+
+  const match = hash.match(/^#day(\d{1,2})$/i);
+  if (!match) {
+    return null;
+  }
+
+  const index = Number(match[1]) - 1;
+  if (Number.isNaN(index) || index < 0 || index >= dayEntries.length) {
+    return null;
+  }
+
+  return index;
+}
+
+function setHashForDay(index) {
+  if (index === null) {
+    if (window.location.hash) {
+      history.replaceState(
+        null,
+        "",
+        window.location.pathname + window.location.search
+      );
+      handleHashChange();
+    } else {
+      handleHashChange();
+    }
+    return;
+  }
+
+  const newHash = `#day${index + 1}`;
+  if (window.location.hash === newHash) {
+    handleHashChange();
+  } else {
+    window.location.hash = newHash;
+  }
+}
+
+function handleHashChange() {
+  const index = parseHashValue(window.location.hash);
+
+  if (!isAuthenticated) {
+    return;
+  }
+
+  if (index === null) {
+    showHome();
+    updateSidebarState();
+    updateHomeGridState();
+    setHomeStatus("");
+    statusMessage.textContent = "";
+    return;
+  }
+
+  const entry = dayEntries[index];
+  if (isDateAccessible(entry.date)) {
+    renderDay(index);
+  } else {
+    showHome();
+    updateSidebarState();
+    updateHomeGridState();
+    setHomeStatus(TOO_SOON_MESSAGE);
+    flashMessage(TOO_SOON_MESSAGE);
+  }
 }
 
 function applyTheme(theme) {
