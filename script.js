@@ -754,6 +754,7 @@ function showHome() {
   if (dayPanel) {
     dayPanel.classList.add("hidden");
   }
+  generateCollageBackground();
   setHomeStatus("");
   statusMessage.textContent = "";
 }
