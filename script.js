@@ -3,6 +3,10 @@ const PASSWORD = "bigmama";
 const TOO_SOON_MESSAGE = "Too soon! Come back on the right day 💫";
 const STORAGE_KEY = "annekeTreatsUnlockedDates";
 
+const START_DATE_STR = "2025-10-03";
+const END_DATE_STR = "2025-10-15";
+const MS_PER_DAY = 24 * 60 * 60 * 1000;
+
 const dayEntries = [
   {
     date: "2025-10-03",
@@ -155,9 +159,21 @@ const dayLayout = document.getElementById("day-layout");
 const backHomeButton = document.getElementById("back-home");
 
 const storage = createStorageHelper(STORAGE_KEY);
-const unlockedDates = new Set(storage.read());
+const unlockedDates = new Set(DEV_MODE ? [] : storage.read());
+
+const START_DATE = createLocalDateFromISO(START_DATE_STR);
+const END_DATE = createLocalDateFromISO(END_DATE_STR);
+const dateToIndex = new Map();
+dayEntries.forEach((entry, index) => {
+  dateToIndex.set(entry.date, index);
+});
 
 let today = startOfDay(new Date());
+let unlockedMaxIndex = DEV_MODE ? dayEntries.length - 1 : calculateUnlockedMaxIndex();
+if (!DEV_MODE) {
+  synchronizeUnlockedDates();
+}
+
 let currentIndex = determineInitialIndex();
 let isAuthenticated = false;
 let currentView = "login";
@@ -541,6 +557,42 @@ function formatEntryText(text) {
     .join("");
 }
 
+function createLocalDateFromISO(isoString) {
+  const [year, month, day] = isoString.split("-").map(Number);
+  return new Date(year, month - 1, day);
+}
+
+function getTodayLocalDate() {
+  const now = new Date();
+  return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+}
+
+function calculateUnlockedMaxIndex() {
+  const todayLocal = getTodayLocalDate();
+
+  if (todayLocal < START_DATE) {
+    return -1;
+  }
+
+  const cappedEnd = END_DATE < START_DATE ? START_DATE : END_DATE;
+  const effectiveToday = todayLocal > cappedEnd ? cappedEnd : todayLocal;
+
+  const diff = Math.floor((effectiveToday - START_DATE) / MS_PER_DAY);
+  return Math.min(dayEntries.length - 1, diff);
+}
+
+function synchronizeUnlockedDates() {
+  unlockedDates.clear();
+
+  if (unlockedMaxIndex >= 0) {
+    for (let i = 0; i <= unlockedMaxIndex; i += 1) {
+      unlockedDates.add(dayEntries[i].date);
+    }
+  }
+
+  storage.write(unlockedDates);
+}
+
 function parseHashValue(hash) {
   if (!hash) {
     return null;
@@ -653,26 +705,34 @@ function isDateAccessible(dateString) {
   if (DEV_MODE) {
     return true;
   }
-  if (unlockedDates.has(dateString)) {
-    return true;
+  const index = dateToIndex.get(dateString);
+  if (index === undefined) {
+    return false;
   }
-  return startOfDay(new Date(`${dateString}T00:00:00`)) <= today;
+  return unlockedMaxIndex >= 0 && index <= unlockedMaxIndex;
 }
 
 function markDayUnlocked(dateString) {
-  if (!isAuthenticated) {
-    return;
-  }
-  if (unlockedDates.has(dateString)) {
+  if (DEV_MODE) {
     return;
   }
 
-  unlockedDates.add(dateString);
-  storage.write(unlockedDates);
+  const recalculated = calculateUnlockedMaxIndex();
+  if (recalculated !== unlockedMaxIndex) {
+    unlockedMaxIndex = recalculated;
+    synchronizeUnlockedDates();
+  }
 }
 
 function refreshToday() {
   today = startOfDay(new Date());
+  if (!DEV_MODE) {
+    const recalculated = calculateUnlockedMaxIndex();
+    if (recalculated !== unlockedMaxIndex) {
+      unlockedMaxIndex = recalculated;
+      synchronizeUnlockedDates();
+    }
+  }
 }
 
 function formatDisplayDate(dateString) {
@@ -851,6 +911,17 @@ function setHomeStatus(message) {
 }
 
 function createStorageHelper(key) {
+  if (DEV_MODE) {
+    return {
+      read() {
+        return [];
+      },
+      write() {
+        /* no persistence in DEV mode */
+      },
+    };
+  }
+
   try {
     const testKey = "__storage_test__";
     window.localStorage.setItem(testKey, testKey);
