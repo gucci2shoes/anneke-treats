@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Surprise</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="dev-badge" class="dev-badge hidden">DEV MODE ACTIVE</div>
+    <div id="app">
+      <section class="panel login-panel" aria-label="Password entry">
+        <div class="card">
+          <h1>Welcome</h1>
+          <p>Enter the secret password to begin.</p>
+          <form id="password-form" autocomplete="off">
+            <label for="password-input" class="visually-hidden">Password</label>
+            <input
+              id="password-input"
+              type="password"
+              name="password"
+              placeholder="Password"
+              required
+              autofocus
+            />
+            <button type="submit">Enter</button>
+          </form>
+          <p id="password-error" role="alert" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section
+        id="home-panel"
+        class="home-panel hidden"
+        aria-label="Advent calendar home"
+      >
+        <div class="home-wrapper">
+          <div class="home-card">
+            <header class="home-header">
+              <h1>Anneke’s Treats Advent</h1>
+              <p>
+                Each day unlocks a new note or clue. Come back daily for the next
+                surprise!
+              </p>
+            </header>
+            <p id="home-status" class="home-status" role="status" aria-live="polite"></p>
+            <ul id="home-grid" class="home-grid"></ul>
+          </div>
+        </div>
+      </section>
+
+      <div id="day-layout" class="layout hidden">
+        <aside class="sidebar" aria-label="Day navigation">
+          <div class="sidebar-header">
+            <button id="back-home" type="button" class="back-home">
+              ← Back to Home
+            </button>
+            <h2 class="sidebar-title">Days</h2>
+          </div>
+          <ul id="day-list" class="day-list"></ul>
+        </aside>
+
+        <main class="main-panel" aria-live="polite">
+          <section
+            class="panel day-panel hidden"
+            aria-label="Daily surprise content"
+          >
+            <div class="day-card" id="day-card">
+              <div class="card" id="day-card-inner">
+                <header>
+                  <p class="day-date" id="day-date"></p>
+                  <h2 id="day-title"></h2>
+                </header>
+
+          <div class="content" id="day-content">
+            <p id="day-intro" class="day-intro hidden"></p>
+            <div class="media">
+              <img id="day-image" src="" alt="Daily surprise" />
+              <video
+                id="day-video"
+                class="hidden"
+                  preload="metadata"
+                  playsinline
+                ></video>
+                <p id="image-placeholder" class="image-placeholder hidden">
+                  Photo coming soon 📸
+                </p>
+              </div>
+              <p id="day-text"></p>
+                </div>
+
+                <p class="message" id="status-message" role="status"></p>
+
+                <footer class="nav">
+                  <button id="prev-day" type="button">Previous</button>
+                  <button id="next-day" type="button">Next</button>
+                </footer>
+                <p class="day-progress" id="day-progress"></p>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
