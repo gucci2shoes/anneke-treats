@@ -1,4 +1,4 @@
-const DEV_MODE = true;
+const DEV_MODE = false;
 const PASSWORD = "forher";
 const TOO_SOON_MESSAGE = "Too soon! Come back on the right day 💫";
 const STORAGE_KEY = "annekeTreatsUnlockedDates";
