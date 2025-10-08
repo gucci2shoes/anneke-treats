@@ -63,7 +63,7 @@ const dayEntries = [
     title: "Day 6",
     intro:
       "Today we’re headed to Mtskheta 🏛️. It’s one of the oldest continuously inhabited cities in the world and home to the Svetitskhoveli Cathedral, built in 1010.",
-    message: "I think you deserve a sweet treat :). Go into the closet, get on your tip toes, and pull out the treat under my timbers hat.",
+    message: "There should be something to brighten up the room delivered between 12-1 today :)",
     image: "images/day6.jpeg",
     theme: "linear-gradient(to bottom, #fddb92, #d1fdff)",
   },
@@ -72,8 +72,7 @@ const dayEntries = [
     title: "Day 7",
     intro:
       "Today we’re off to Shatili ⛰️. This medieval fortress-village was built between the 7th and 13th centuries, perched deep in the Arghuni Gorge.",
-    message:
-      "Here's another throwback note I wrote for you:\nAnneke,\n\nI know it’s hard to remember as law school ramps back up into it’s craziness, but you have already achieved so much and continue to get everything you deserve for your hard work: a summer position at Skadden, Law Review, straight As, clinic, a return offer and scholarship because they don’t want to lose you, and rave reviews from everyone you’ve worked with.\n\nIf you’re feeling overwhelmed or like the long hours will never end I hope this mug reminds you of vacation in Hawaii and that there is light at the end of the tunnel and I’m always here for you. I can’t wait to travel the world with you. Pasta with you in Italy? Premier league match in England? Anneke as my European tour guide?\n\nI love you more every day,\nGuz",
+    message: "I think you deserve a sweet treat :). Go into the closet, get on your tip toes, and pull out the treat under my timbers hat.",
     image: "images/day7.jpeg",
     theme: "linear-gradient(to bottom, #f6d365, #fda085)",
   },
@@ -82,7 +81,8 @@ const dayEntries = [
     title: "Day 8",
     intro:
       "Still in Shatili. The Khevsureti region is known for its mountaineer culture and defensive tower architecture.",
-    message: "Scavenger hunt: 'Check the spice rack 🌶️'",
+    message:
+      "Here's another throwback lawschool note:\nAnneke,\n\nI know it’s hard to remember as law school ramps back up into it’s craziness, but you have already achieved so much and continue to get everything you deserve for your hard work: a summer position at Skadden, Law Review, straight As, clinic, a return offer and scholarship because they don’t want to lose you, and rave reviews from everyone you’ve worked with.\n\nIf you’re feeling overwhelmed or like the long hours will never end I hope this mug reminds you of vacation in Hawaii and that there is light at the end of the tunnel and I’m always here for you. I can’t wait to travel the world with you. Pasta with you in Italy? Premier league match in England? Anneke as my European tour guide?\n\nI love you more every day,\nGuz",
     image: "images/day8.jpeg",
     theme: "linear-gradient(to bottom, #84fab0, #8fd3f4)",
   },
@@ -115,12 +115,21 @@ const dayEntries = [
     theme: "linear-gradient(to bottom, #5ee7df, #b490ca)",
   },
   {
-    date: "2025-10-15",
+    date: "2025-10-14",
     title: "Day 12",
     intro:
       "Back in Tbilisi 🎶. The city hosts an annual Jazz Festival in October, bringing international jazz, blues, and soul artists.",
-    message: "Final message: 'I’m probably on my way home right now… get ready for a big hug 🫂'",
+    message: "Sweet anticipation note: 'One more sleep until I’m back!'",
     image: "images/day12.jpeg",
+    theme: "linear-gradient(to bottom, #5ee7df, #b490ca)",
+  },
+  {
+    date: "2025-10-15",
+    title: "Day 13",
+    intro:
+      "Back in the air on my way home!",
+    message: "Final message: 'I’m probably on my way home right now… get ready for a big hug 🫂'",
+    image: "images/day13.jpeg",
     theme: "linear-gradient(to bottom, #ee9ca7, #ffdde1)",
   },
 ];
