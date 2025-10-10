@@ -92,8 +92,9 @@ const dayEntries = [
     intro:
       "Today we’re headed to Telavi 🍷. It’s in the heart of Georgia’s wine region and is home to a 900-year-old plane tree.",
     message:
-      "First paragraph of a longer love letter placeholder.\n\nSecond paragraph keeps the heartfelt tone and adds future plans.",
+      "Throwback to you, me, and Biggs. I miss you (and traveling with you) lots. I can't wait to go to Mexico City.",
     image: "images/day9.jpeg",
+    video: "videos/jamaica.mp4",
     theme: "linear-gradient(to bottom, #fccb90, #d57eeb)",
   },
   {
@@ -101,7 +102,7 @@ const dayEntries = [
     title: "Day 10",
     intro:
       "Still in Telavi. The Kakheti region around Telavi is often considered Georgia’s wine capital — Georgia is thought to be one of the birthplaces of wine-making over 8,000 years ago.",
-    message: "Scavenger hunt: 'Look in your favorite mug ☕'",
+    message: "Something should be delivered today so you can see what I get to see every day 😍",
     image: "images/day10.jpeg",
     theme: "linear-gradient(to bottom, #30cfd0, #330867)",
   },
@@ -119,7 +120,7 @@ const dayEntries = [
     title: "Day 12",
     intro:
       "Back in Tbilisi 🎶. The city hosts an annual Jazz Festival in October, bringing international jazz, blues, and soul artists.",
-    message: "Sweet anticipation note: 'One more sleep until I’m back!'",
+    message: "One more sleep until I’m back! I hope everything goes well down south, I'm thinking of you and I can't wait to see you tomorrow.",
     image: "images/day12.jpeg",
     theme: "linear-gradient(to bottom, #5ee7df, #b490ca)",
   },
