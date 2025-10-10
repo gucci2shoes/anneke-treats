@@ -1,4 +1,4 @@
-const DEV_MODE = true;
+const DEV_MODE = false;
 const PASSWORD = "bigmama";
 const TOO_SOON_MESSAGE = "Too soon! Come back on the right day 💫";
 const STORAGE_KEY = "annekeTreatsUnlockedDates";
@@ -80,7 +80,7 @@ const dayEntries = [
     date: "2025-10-10",
     title: "Day 8",
     intro:
-      "Still in Shatili. The Khevsureti region is known for its mountaineer culture and defensive tower architecture.",
+      "Still in Shatili. The Khevsureti region is known for its mountaineer culture and defensive tower architecture, a bunch of the towers are still here from the middle ages!",
     message:
       "Here's another throwback lawschool note:\nAnneke,\n\nI know it’s hard to remember as law school ramps back up into it’s craziness, but you have already achieved so much and continue to get everything you deserve for your hard work: a summer position at Skadden, Law Review, straight As, clinic, a return offer and scholarship because they don’t want to lose you, and rave reviews from everyone you’ve worked with.\n\nIf you’re feeling overwhelmed or like the long hours will never end I hope this mug reminds you of vacation in Hawaii and that there is light at the end of the tunnel and I’m always here for you. I can’t wait to travel the world with you. Pasta with you in Italy? Premier league match in England? Anneke as my European tour guide?\n\nI love you more every day,\nGuz",
     image: "images/day8.jpeg",
