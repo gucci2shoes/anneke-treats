@@ -109,8 +109,8 @@ const dayEntries = [
     date: "2025-10-13",
     title: "Day 11",
     intro:
-      "Today we’re off to Signaghi ❤️. It’s nicknamed the ‘City of Love,’ perched above the Alazani Valley with panoramic views.",
-    message: "Sweet anticipation note: 'One more sleep until I’m back!'",
+      "Today we’re off to Signaghi. It’s nicknamed the ‘City of Love,’ perched above the Alazani Valley with panoramic views.",
+    message: "There should be a little treat delivered today. It will be addressed to you, and hopefully it keeps your lil toes warm now that it's dipped into arctic temps in SD (looks like it's below 70 every day for a week 🥶).",
     image: "images/day11.jpeg",
     theme: "linear-gradient(to bottom, #5ee7df, #b490ca)",
   },
